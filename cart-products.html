@@ -423,8 +423,6 @@
                 }
             }
 
-            console.log(checkOutBtn);
-
             function showListSearch() {
                 let total;
                 //cach 1 , dùng phuong thuc map
@@ -439,11 +437,6 @@
                             </td>
                         </tr>`;
                 } else {
-                    if(checkOutBtn) {
-                        for(let i = 0; i < listSearch.length;   i++) {
-                            document.getElementById("countProducts").disabled = false;
-                        }
-                    } else {
                         for (let i = 0; i < listSearch.length; i++) {
                             drawTable += `<tr id="deleteTable">
                             <td>
@@ -469,8 +462,6 @@
     
                             </td>
                         </tr>`;
-                        // document.getElementById("countProducts").disabled = true;
-                        }
                     }
                 }
                 document.getElementById("draw-table").innerHTML = drawTable;
