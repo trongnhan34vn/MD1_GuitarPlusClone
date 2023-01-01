@@ -165,8 +165,24 @@
             <div class="path">
                 <div class="grid">
                     <h1>
-                        <a style="text-decoration: none; color: var(--primay-color)" href="index.html">Trang chủ</a> / <a style="text-decoration: none; color: var(--primay-color)" href="account-information.html">Thông tin tài khoản</a> / Xác nhận thông tin tài
-                        khoản
+                        <a
+                            style="
+                                text-decoration: none;
+                                color: var(--primay-color);
+                            "
+                            href="index.html"
+                            >Trang chủ</a
+                        >
+                        /
+                        <a
+                            style="
+                                text-decoration: none;
+                                color: var(--primay-color);
+                            "
+                            href="account-information.html"
+                            >Thông tin tài khoản</a
+                        >
+                        / Xác nhận thông tin tài khoản
                     </h1>
                 </div>
             </div>
@@ -324,7 +340,6 @@
         <script>
             let firstName;
             let lastName;
-            let gender;
             let birth;
             let currentPassword;
             let newPassword;
@@ -336,6 +351,7 @@
             if (listUsers == null) {
                 listUsers = [];
             }
+            let gender = currentUser.gender;
 
             document.getElementById("email").value = email;
             document.getElementById("firstName").value = currentUser.firstName;
@@ -348,7 +364,17 @@
                 gender = document.querySelector(
                     "input[name = gender]:checked"
                 ).value;
+                console.log(gender);
+                // Check Validate Gender
+                if (gender.trim() == "") {
+                    gender = "";
+                    checkValidate = false;
+                    document.getElementById("validateGender").innerHTML =
+                        "Gender is required!";
+                } else {
                     checkValidate = true;
+                    document.getElementById("validateGender").innerHTML = "";
+                }
             }
 
             function validate() {
@@ -413,6 +439,8 @@
                 }
             }
 
+            console.log(gender);
+
             function saveInfo() {
                 firstName = document.getElementById("firstName").value;
                 lastName = document.getElementById("lastName").value;
@@ -444,7 +472,7 @@
                         if (birth !== "") {
                             currentUser.birth = birth;
                         }
-                        if (gender == undefined) {
+                        if (gender !== "") {
                             currentUser.gender = gender;
                         }
                         // Thay pass trên listUser
@@ -469,7 +497,7 @@
                         "current_user",
                         JSON.stringify(currentUser)
                     );
-                    location.href = "validateUser.html";
+                    // location.href = "validateUser.html";
                 } else {
                     document.getElementById(
                         "validateCurrentPassword"

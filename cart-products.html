@@ -113,7 +113,17 @@
             </div>
             <div class="path path-">
                 <div class="grid">
-                    <h1><a style="text-decoration: none; color: var(--primay-color)" href="index.html">Trang chủ</a> / Giỏ hàng</h1>
+                    <h1>
+                        <a
+                            style="
+                                text-decoration: none;
+                                color: var(--primay-color);
+                            "
+                            href="index.html"
+                            >Trang chủ</a
+                        >
+                        / Giỏ hàng
+                    </h1>
                 </div>
             </div>
             <div class="register product-lists">
@@ -164,7 +174,10 @@
                                     </h1>
                                 </div>
                                 <div class="check-out-button">
-                                    <button onclick="checkOut()" class="btn">
+                                    <button
+                                        id="checkOutBtn"
+                                        onclick="checkOut()"
+                                        class="btn">
                                         Check Out
                                     </button>
                                 </div>
@@ -370,7 +383,6 @@
                         break;
                     }
                 }
-                console.log(cartCurrentUser);
                 localStorage.removeItem("current_user");
                 localStorage.setItem(
                     "current_user",
@@ -386,12 +398,13 @@
 
             // Tìm kiếm
             let listSearch = [];
-
+            let checkOutBtn = false;
             function actionSearch() {
                 let productSearch =
                     document.getElementById("searchProduct").value;
                 if (productSearch.trim() == "") {
                     showCart();
+                    checkOutBtn = true;
                 } else {
                     listSearch = [];
                     for (let i = 0; i < cartList.length; i++) {
@@ -405,9 +418,13 @@
                         }
                     }
                     showListSearch();
+                    checkOutBtn = false;
+                    return checkOutBtn;
                 }
             }
-            console.log(listSearch);
+
+            console.log(checkOutBtn);
+
             function showListSearch() {
                 let total;
                 //cach 1 , dùng phuong thuc map
@@ -422,31 +439,38 @@
                             </td>
                         </tr>`;
                 } else {
-                    for (let i = 0; i < listSearch.length; i++) {
-                        drawTable += `<tr id="deleteTable">
-                        <td>
-                            <img style="width: 80px"
-                                 src=${listSearch[i].image}
-                                 alt="">
-                        </td>
-                        <td>
-                            <p style="font-weight: bold; text-align: left;">${
-                                listSearch[i].name
-                            }</p>
-                        </td>
-                        <td style="color: red" id="price">${formatNumber(
-                            listSearch[i].price
-                        )}</td>
-                        <td><input oninput="" style="text-align: center" id="countProducts" value="${
-                            listSearch[i].quantity
-                        }" type="number"></td>
-                        <td style="color: red">${formatNumber(
-                            listSearch[i].price * listSearch[i].quantity
-                        )}</td>
-                        <td>
-
-                        </td>
-                    </tr>`;
+                    if(checkOutBtn) {
+                        for(let i = 0; i < listSearch.length;   i++) {
+                            document.getElementById("countProducts").disabled = false;
+                        }
+                    } else {
+                        for (let i = 0; i < listSearch.length; i++) {
+                            drawTable += `<tr id="deleteTable">
+                            <td>
+                                <img style="width: 80px"
+                                     src=${listSearch[i].image}
+                                     alt="">
+                            </td>
+                            <td>
+                                <p style="font-weight: bold; text-align: left;">${
+                                    listSearch[i].name
+                                }</p>
+                            </td>
+                            <td style="color: red" id="price">${formatNumber(
+                                listSearch[i].price
+                            )}</td>
+                            <td><input disabled style="text-align: center" id="countProducts" value="${
+                                listSearch[i].quantity
+                            }" type="number"></td>
+                            <td style="color: red">${formatNumber(
+                                listSearch[i].price * listSearch[i].quantity
+                            )}</td>
+                            <td>
+    
+                            </td>
+                        </tr>`;
+                        // document.getElementById("countProducts").disabled = true;
+                        }
                     }
                 }
                 document.getElementById("draw-table").innerHTML = drawTable;
@@ -457,27 +481,30 @@
             // Xác nhận đơn hàng
             function checkOut() {
                 if (cartCurrentUser.length == 0) {
-                    showToast()
+                    showToast("Chưa có sản phẩm nào trong giỏ hàng! Mua sắm thôi!")
                 } else {
-                    if (cartCurrentUser.length !== 0) {
-                        for (let index = 0; index < cartList.length; index++) {
-                            if (cartList[index].userId == currentUser.id) {
-                                cartList.splice(index);
-                                localStorage.removeItem("cartList");
-                                localStorage.setItem(
-                                    "cartList",
-                                    JSON.stringify(cartList)
-                                );
+                    if(checkOutBtn) {
+                        if (cartCurrentUser.length !== 0) {
+                            for (let index = 0; index < cartList.length; index++) {
+                                if (cartList[index].userId == currentUser.id) {
+                                    cartList.splice(index);
+                                    localStorage.removeItem("cartList");
+                                    localStorage.setItem(
+                                        "cartList",
+                                        JSON.stringify(cartList)
+                                    );
+                                }
                             }
+                            cartCurrentUser = [];
+                            location.href = "validateOrder.html";
                         }
-                        console.log(cartList);
-                        cartCurrentUser = [];
-                        location.href = "validateOrder.html";
+                    } else {
+                        showToast("Vui lòng thoát khỏi chế độ tìm kiếm để tiến hành thanh toán!")
                     }
                 }
             }
 
-            function showToast() {
+            function showToast(alert) {
                 let toast = document.createElement("div");
                 toast.classList.add("toast");
 
@@ -492,8 +519,7 @@
                             </div>
                             <div class="toast-body">
                                 <h3>
-                                    Chưa có sản phẩm nào trong giỏ hàng! Mua sắm
-                                    thôi!
+                                    ${alert}
                                 </h3>
                             </div>
                             <div onclick="closeToast()" class="toast-close">
@@ -518,7 +544,6 @@
                 })
                 clearTimeout()
             }
-
 
             function formatNumber(number) {
                 return new Intl.NumberFormat("de-DE", {

@@ -29,6 +29,10 @@
     margin-right: 4px;
 }
 
+.header-navbar__contact-item {
+    animation: refresh 1.5s;
+}
+
 /* Header Nav container */
 
 #navbar.sticky {
@@ -77,6 +81,69 @@
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 500;
+    position: relative;
+}
+
+.header-nav-products-wrap:hover .header-nav-products-list {
+    display: block;
+}
+
+.header-nav-products-list {
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 7px 14px rgb(50 50 93 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+    top: 30px;
+    width: 350px;
+    display: none;
+    animation: slideUp 0.6s;
+    z-index: 999;
+}
+
+.header-nav-products-list::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    top: -10px;
+    cursor: pointer;
+    left: 0;
+}
+
+.header-nav-products-list a {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-nav-products-list a i {
+    font-size: 12px;
+    transform: translateX(0);
+    transition: all ease 0.5s;
+}
+
+.header-nav-products-item:hover .header-nav-icon {
+    transform: translateX(5px);
+}
+
+.header-nav-products-list .header-nav-products-item {
+    margin: 0;
+    list-style: none;
+    text-transform: inherit;
+}
+
+.header-nav-products-list .header-nav-products-item a {
+    text-transform: capitalize;
+    border-bottom: 1px solid #F5F6F9;
+}
+
+.header-nav-products-list .header-nav-products-item a:hover {
+    color: var(--primary-color)
 }
 
 .header-navbar__lists-item a {
@@ -84,16 +151,19 @@
     color: var(--text-color);
 }
 
-.header-navbar__lists-item li:first-child a {
-    color: var(--primary-color);
-}
-
-.header-navbar__lists-item li {
-    display: inline-block;
+.header-navbar__lists-item > li > a {
     padding: 10px 14px;
 }
 
-.header-navbar__lists-item li:hover a {
+.header-navbar__lists-item > li:first-child > a {
+    color: var(--primary-color);
+}
+
+.header-navbar__lists-item > li {
+    display: inline-block;
+}
+
+.header-navbar__lists-item > li:hover > a {
     color: var(--primary-color);
 }
 
@@ -272,6 +342,7 @@
 
 .extention {
     font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid #F5F6F9;
 }
 
 .extention-service-wrap {
