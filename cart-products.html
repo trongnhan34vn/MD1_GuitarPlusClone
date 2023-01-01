@@ -459,7 +459,9 @@
                                 listSearch[i].price * listSearch[i].quantity
                             )}</td>
                             <td>
-    
+                                <button onclick="deleteProduct(${
+                                listSearch[i].id
+                            })">Delete</button>       
                             </td>
                         </tr>`;
                     }
