@@ -314,29 +314,29 @@
         let drawUserInfo = '';
         let accName = currentUser.firstName + " " + currentUser.lastName;
                 drawUserInfo += `<tr>
-                                                <td>Name:</td>
-                                                <td>${currentUser.firstName + " " + currentUser.lastName} <a href="updateInfoUser.html">Change</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gender:</td>
-                                                <td>${currentUser.gender} <a href="updateInfoUser.html">Change</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Date of Birth:</td>
-                                                <td>${currentUser.birth} <a href="updateInfoUser.html">Change</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Address:</td>
-                                                <td><a href="">Edit</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Email:</td>
-                                                <td>${currentUser.email}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Password:</td>
-                                                <td>******* <a href="updateInfoUser.html">Change</a></td>
-                                            </tr>`
+                                    <td>Name:</td>
+                                    <td>${currentUser.firstName + " " + currentUser.lastName} <a href="updateInfoUser.html">Change</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Gender:</td>
+                                    <td>${currentUser.gender} <a href="updateInfoUser.html">Change</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Date of Birth:</td>
+                                    <td>${currentUser.birth} <a href="updateInfoUser.html">Change</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td><a href="">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>${currentUser.email}</td>
+                                </tr>
+                                <tr>
+                                    <td>Password:</td>
+                                    <td>******* <a href="updateInfoUser.html">Change</a></td>
+                                </tr>`
 
         document.getElementById('drawInfoUser').innerHTML = drawUserInfo;
         document.getElementById('accName').innerHTML = accName;
