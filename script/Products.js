@@ -4,12 +4,12 @@ class Products {
     name;
     price;
     idUser;
-    constructor(id, img, name, price,idUser) {
+    constructor(id, img, name, price) {
         this.id = id;
         this.img = img;
         this.name = name;
         this.price = price;
-        this.idUser = idUser;
+        // this.idUser = idUser;
     }
 
     setID(id) {
@@ -44,13 +44,13 @@ class Products {
         return this.price;
     }
 
-    setIdUser(idUser)  {
-        this.idUser = idUser;
-    }
+    // setIdUser(idUser)  {
+    //     this.idUser = idUser;
+    // }
 
-    getIdUser() {
-        return this.idUser;
-    }
+    // getIdUser() {
+    //     return this.idUser;
+    // }
 }
 
 let pd_1 = new Products(1,"https://product.hstatic.net/200000388065/product/you_0072_80e8a8dccc7547d9b77fcf01a5ebec48_master.jpg","GUITAR PLUS F0 PERFORMER DC",7000000);
@@ -83,6 +83,7 @@ listProducts.push(pd_9);
 listProducts.push(pd_10);
 listProducts.push(pd_11);
 listProducts.push(pd_12);
+
 
 localStorage.removeItem("list_products");
 localStorage.setItem('list_product', JSON.stringify(listProducts));

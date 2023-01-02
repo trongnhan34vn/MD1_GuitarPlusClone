@@ -314,7 +314,7 @@
                         <td style="color: red;">${formatNumber(
                             cartList[i].price
                         )}</td>
-                        <td><input oninput="changeQuantity(${
+                        <td><input min="1" oninput="changeQuantity(${
                             cartList[i].id
                         })" style="text-align: center" id="qt + ${
                                 cartList[i].id
@@ -345,7 +345,6 @@
             // Thay đổi số lượng trong ô input
 
             function changeQuantity(index) {
-                let getIndexTd = "id" + " + " + index.toString();
                 let getIndexTdinput = "qt" + " + " + index.toString();
                 // getIndexTd += test;
                 let fixQuantity =
@@ -398,13 +397,14 @@
 
             // Tìm kiếm
             let listSearch = [];
-            let checkOutBtn = false;
+            let checkOutBtn = true;
             function actionSearch() {
                 let productSearch =
                     document.getElementById("searchProduct").value;
+                    console.log(productSearch);
                 if (productSearch.trim() == "") {
-                    showCart();
                     checkOutBtn = true;
+                    showCart();
                 } else {
                     listSearch = [];
                     for (let i = 0; i < cartList.length; i++) {

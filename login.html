@@ -200,22 +200,10 @@
                     document.getElementById('validateEmail').innerHTML = "Email is invalid!";
                     return;
                 } else {
-                    let checkExisted = false;
-                    for (let i = 0; i < listUser.length; i++) {
-                        if(email == listUser[i].email) {
-                            checkExisted = true;
-                        }
-                    }
-                    if(checkExisted) {
-                        checkValidate = true;
-                        document.getElementById('validateEmail').innerHTML = "";
-                    } else {
-                        checkValidate = false;
-                        document.getElementById('validateEmail').innerHTML = "Account is not existed";
-                    }
+                    checkValidate = true;
+                    document.getElementById('validateEmail').innerHTML = "";
                 }
             }
-            console.log(password)
 
             if(password.trim() == "") {
                 checkValidate = false;
@@ -238,6 +226,21 @@
 
         function login() {
             if(checkValidate) {
+                
+                let checkExisted = false;
+                    for (let i = 0; i < listUser.length; i++) {
+                        if(email == listUser[i].email) {
+                            checkExisted = true;
+                        }
+                    }
+                    if(checkExisted) {
+                        checkValidate = true;
+                        document.getElementById('validateEmail').innerHTML = "";
+                    } else {
+                        checkValidate = false;
+                        document.getElementById('validateEmail').innerHTML = "Account is not existed";
+                    }
+
                 //     Kiểm tra đúng mật khẩu chưa
                 let checkPass = false;
                 for (let i = 0; i < listUser.length; i++) {
@@ -255,7 +258,7 @@
                     }
                 }
 
-                if(checkPass) {
+                if(checkPass && checkExisted) {
                     checkValidate = true;
                     document.getElementById('validatePassword').innerHTML = "";
                     // currentUser = findByEmail(email).firstName + " " + findByEmail(email).lastName;
